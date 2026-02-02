@@ -12,7 +12,8 @@ namespace ELKH.Models
         public int FkRegisteredUserId { get; set; }
         public RegisteredUser RegisteredUser { get; set; } = new RegisteredUser();
 
-        //Relationship with CartItem
-        public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+        //Relationship with Product
+        public int FkProductID { get; set; }
+        public Product Product { get; set; } =  new Product();
     }
 }

@@ -24,10 +24,13 @@ namespace ELKH.Models
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
         //Relationship with Transaction
-        public int FkTransactionId { get; set; }
         public Transaction Transaction { get; set; } = new Transaction();
 
-        //Delivery Relationship
-        public Delivery Delivery { get; set; } = new Delivery();
+        //Order Status Relationship
+        public OrderStatus OrderStatuses { get; set; } = new OrderStatus();
+
+        //ContactDetail Relationship
+        public int FkContactId { get; set; }
+        public ContactDetail ContactDetail { get; set; } = new ContactDetail();
     }
 }

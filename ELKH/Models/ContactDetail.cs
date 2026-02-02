@@ -2,10 +2,16 @@
 
 namespace ELKH.Models
 {
-    public class Address
+    public class ContactDetail
     {
         [Key]
-        public int PkAddressId { get; set; }
+        public int PkContactId { get; set; }
+        [Display(Name ="First Name")]
+        public string FirstName { get; set; } = string.Empty;
+        [Display(Name = "Last Name")]
+        public string LastName { get; set; } = string.Empty;
+        [Display(Name = "Phone Number")]
+        public string PhoneNumber { get; set; } = string.Empty;
         public string Street { get; set; } = string.Empty;
         public string City { get; set; } = string.Empty;
         public string Province { get; set; } = string.Empty;
@@ -19,7 +25,10 @@ namespace ELKH.Models
         public int FkRegisteredUserId { get; set; }
         public RegisteredUser RegisiteredUser { get; set; } = new RegisteredUser();
 
-        // Delivery Relationship
-        public ICollection<Delivery> Deliveries { get; set; } = new List<Delivery>();
+        //Relationship with Transaction
+        public ICollection<Transaction> Transactions { get; set; } = new List<Transaction>();
+
+        //Relationship with ORder
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }

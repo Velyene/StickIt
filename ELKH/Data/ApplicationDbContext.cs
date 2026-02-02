@@ -16,32 +16,33 @@ namespace ELKH.Data
         public DbSet<ProductImage> ProductImages { get; set; }
         public DbSet<RegisteredUser> RegisteredUsers { get; set; }
         public DbSet<Cart> Carts { get; set; }
-        public DbSet<CartItem> CartItems { get; set; }
         public DbSet<Order> Orders { get; set; }
         public DbSet<OrderItem> OrderItems { get; set; }
         public DbSet<Transaction> Transactions { get; set; }
-        public DbSet<Address> Addresses { get; set; }
-        public DbSet<Delivery> Deliveries { get; set; }
+        public DbSet<ContactDetail> ContactDetails { get; set; }
+        public DbSet<OrderStatus> OrderStatuses { get; set; }
         public DbSet<ProductRating> ProductRatings { get; set; }
+        public DbSet<WishList> WishLists { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<RegisteredUser>()
-                .HasOne(u => u.Cart)
-                .WithOne(c => c.RegisteredUser)
-                .HasForeignKey<Cart>(c => c.FkRegisteredUserId);
+            modelBuilder.Entity<Order>()
+                .HasOne(o => o.OrderStatuses)
+                .WithOne(d => d.Order)
+                .HasForeignKey<OrderStatus>(o => o.FkOrderId);
 
-            modelBuilder.Entity<Transaction>()
-                .HasOne(t => t.Order)
-                .WithOne(t => t.Transaction)
-                .HasForeignKey<Order>(t => t.FkTransactionId);
+            modelBuilder.Entity<RegisteredUser>()
+                        .HasOne(r => r.WishLists)
+                        .WithOne(w => w.RegisteredUser)
+                        .HasForeignKey<WishList>(w => w.FkUserId);
 
             modelBuilder.Entity<Order>()
-                .HasOne(o => o.Delivery)
-                .WithOne(d => d.Order)
-                .HasForeignKey<Delivery>(o => o.FkOrderId);
+                        .HasOne(o => o.Transaction)
+                        .WithOne(t => t.Order)
+                        .HasForeignKey<Transaction>(t => t.FkOrderId);
+
         }
     }
 

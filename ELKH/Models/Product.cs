@@ -29,13 +29,17 @@ namespace ELKH.Models
         //Product Image Relationship
         public ICollection<ProductImage> ProductImages { get; set; } = new List<ProductImage>();
 
-        //CartItem Relationship
-        public ICollection<CartItem> CartItems { get; set; } = new List<CartItem>();
+        //Cart Relationship
+        public ICollection<Cart> Carts { get; set; } = new List<Cart>();
 
         //OriderItem Relationship
         public ICollection<OrderItem> OrderItems { get; set; } = new List<OrderItem>();
 
         //Product Rating Relationship
         public ICollection<ProductRating> ProductRatings { get; set; } = new List<ProductRating>();
+
+        //WishList Relationship
+        public int FkWishListId { get; set; }
+        public WishList WishList { get; set; } = new WishList();
     }
 }

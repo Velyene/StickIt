@@ -76,13 +76,6 @@ namespace ELKH.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-            [Required]
-            [DisplayName("First Name")]
-            public string FirstName { get; set; }
-
-            [Required]
-            [DisplayName("Last Name")]
-            public string LastName { get; set; }
             /// <summary>
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
@@ -136,9 +129,7 @@ namespace ELKH.Areas.Identity.Pages.Account
                     //Save the registered user into database with additional information
                     var registeredUser = new RegisteredUser()
                     {
-                        Email = Input.Email,
-                        FirstName = Input.FirstName,
-                        LastName = Input.LastName
+                        Email = Input.Email
                     };
                         _context.RegisteredUsers.Add(registeredUser);
                         _context.SaveChanges();
