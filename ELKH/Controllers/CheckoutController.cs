@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ELKH.Controllers;
 
-public class CheckoutController
+public class CheckoutController:Controller
 {
     [HttpGet]
     public IActionResult Index()

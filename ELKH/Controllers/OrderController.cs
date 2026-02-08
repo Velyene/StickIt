@@ -1,12 +1,12 @@
 using Microsoft.AspNetCore.Mvc;
-using E_Commerce.Data;
+using ELKH.Data;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace ELKH.Controllers;
 
-public class OrderController
+public class OrderController:Controller
 {
     private readonly ApplicationDbContext _context;
 
@@ -17,9 +17,10 @@ public class OrderController
 
     public async Task<IActionResult> History()
     {
+        
             
         var orders = await _context.Orders
-            .OrderByDescending(o => o.OrderDate)
+            .OrderByDescending(o => o.CreatedAt)
             .ToListAsync();
 
         return View(orders);
@@ -30,8 +31,8 @@ public class OrderController
         if (id <= 0) return NotFound();
 
         var order = await _context.Orders
-            .Include(o => o.Items)
-            .FirstOrDefaultAsync(o => o.Id == id);
+            .Include(o => o.OrderItems)
+            .FirstOrDefaultAsync(o => o.PkOrderId == id);
 
         if (order == null) return NotFound();
 

@@ -1,46 +1,37 @@
 using Microsoft.AspNetCore.Mvc;
-using E_Commerce.Models;
+using ELKH.Models;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace ELKH.Controllers;
 
-public class CartController
+public class CartController : Controller
 {
-    public class CartController : Controller
+    private static List<Product> _cartItems = new();
+
+    public IActionResult Index()
     {
-        
-        private static List<Product> _cartItems = new List<Product>();
+        return View(_cartItems);
+    }
 
-        
-        public IActionResult Index()
-        {
-            return View(_cartItems);
-        }
+    [HttpPost]
+    public IActionResult AddToCart(int itemId, int quantity)
+    {
+        if (quantity <= 0) return BadRequest("Quantity must be positive.");
 
-        
-        [HttpPost]
-        public IActionResult AddToCart(int itemId, int quantity)
-        {
-            
-            if (quantity <= 0) return BadRequest("Quantity must be positive.");
+        // Fake product for now, will be replaced later
+        _cartItems.Add(new Product { Name = $"Product {itemId}", Price = 10.00m });
 
-            
-            _cartItems.Add(new Product { Id = itemId, Name = $"Product {itemId}", Price = 10.00m });
-            
-            return RedirectToAction(nameof(Index));
-        }
+        return RedirectToAction(nameof(Index));
+    }
 
-        
-        [HttpPost]
-        public IActionResult RemoveFromCart(int itemId)
-        {
-            var item = _cartItems.FirstOrDefault(p => p.Id == itemId);
-            if (item != null)
-            {
-                _cartItems.Remove(item);
-            }
-            return RedirectToAction(nameof(Index));
-        }
+    [HttpPost]
+    public IActionResult RemoveFromCart(int itemId)
+    {
+        // Fake product for now, will be replaced later
+        var item = _cartItems.FirstOrDefault(p => p.PkProductId == itemId);
+        if (item != null) _cartItems.Remove(item);
+
+        return RedirectToAction(nameof(Index));
     }
 }
