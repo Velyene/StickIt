@@ -7,7 +7,7 @@ namespace ELKH.Controllers;
 
 public class CartController : Controller
 {
-    private static List<Product> _cartItems = new();
+    private static List<ProductModel> _cartItems = new();
 
     public IActionResult Index()
     {
@@ -20,7 +20,7 @@ public class CartController : Controller
         if (quantity <= 0) return BadRequest("Quantity must be positive.");
 
         // Fake product for now, will be replaced later
-        _cartItems.Add(new Product { Name = $"Product {itemId}", Price = 10.00m });
+        _cartItems.Add(new ProductModel { Name = $"Product {itemId}", Price = 10.00m });
 
         return RedirectToAction(nameof(Index));
     }
@@ -28,7 +28,7 @@ public class CartController : Controller
     [HttpPost]
     public IActionResult RemoveFromCart(int itemId)
     {
-        // Fake product for now, will be replaced later
+        // Find product by id in cart
         var item = _cartItems.FirstOrDefault(p => p.PkProductId == itemId);
         if (item != null) _cartItems.Remove(item);
 

@@ -16,6 +16,9 @@ namespace ELKH.Models
         [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
+        [Display(Name ="Delivery Status")]
+        public string DeliveryStatus { get; set; } = string.Empty;
+
         //Relationship with User
         public int FkRegisteredUserId { get; set; }
         public RegisteredUserModel RegisteredUser { get; set; } = new RegisteredUserModel();

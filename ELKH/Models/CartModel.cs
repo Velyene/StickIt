@@ -7,6 +7,8 @@ namespace ELKH.Models
     {
         [Key]
         public int PkCartId { get; set; }
+        public int Quantity { get; set; } = 1;
+        public decimal TotalPrice { get; set; }
 
         //Relationship with RegisteredUser table
         public int FkRegisteredUserId { get; set; }
