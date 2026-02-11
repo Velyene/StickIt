@@ -1,7 +1,9 @@
 using ELKH.Data;
 using ELKH.Repositories;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Localization;
 using Microsoft.EntityFrameworkCore;
+using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -21,7 +23,22 @@ builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.Requ
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 
+// Register repositories for dependency injection
+builder.Services.AddScoped<RegisteredUserLogRepo>();
+builder.Services.AddScoped<RegisteredUserProfileRepo>();
+builder.Services.AddScoped<ContactDetailRepo>();
+
 var app = builder.Build();
+
+/// Localization configuration - set default culture to English (Canada) and specify supported cultures and currency
+var supportedCultures = new[] { new CultureInfo("en-CA") };
+
+app.UseRequestLocalization(new RequestLocalizationOptions
+{
+    DefaultRequestCulture = new RequestCulture("en-CA"),
+    SupportedCultures = supportedCultures,
+    SupportedUICultures = supportedCultures
+});
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -38,6 +55,7 @@ else
 app.UseHttpsRedirection();
 app.UseRouting();
 
+//app.UseAuthentication(); //-> Enable this when you want to require login for the entire app. Otherwise, you can use [Authorize] on specific controllers/actions as needed.
 app.UseAuthorization();
 
 app.MapStaticAssets();
