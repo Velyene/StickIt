@@ -33,6 +33,9 @@
         </nav>
     </header>
     <div class="container">
+        <div>
+            @RenderSection("title",false)
+        </div>
         <main role="main" class="pb-3">
             @RenderBody()
         </main>
