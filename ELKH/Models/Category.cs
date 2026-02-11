@@ -1,5 +1,4 @@
-﻿using Microsoft.Build.Tasks.Deployment.Bootstrapper;
-using System.ComponentModel;
+﻿using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace ELKH.Models
