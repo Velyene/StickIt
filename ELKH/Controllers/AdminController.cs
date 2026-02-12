@@ -32,6 +32,10 @@ namespace ELKH.Controllers
 
         public IActionResult ManageUserRole()
         {
+            //var model = new RoleVM();
+            //model.Roles = _roleRepo.GetAllRoles();
+
+            //return View(model);
             return View();
 
         }
