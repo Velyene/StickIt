@@ -29,12 +29,7 @@
     </PackageReference>
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="10.0.2" />
   </ItemGroup>
-
-<<<<<<< HEAD
   <ItemGroup>
     <Folder Include="Views\Manager\" />
   </ItemGroup>
-
-=======
->>>>>>> Staff-Branch
 </Project>
