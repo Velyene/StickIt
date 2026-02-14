@@ -7,8 +7,7 @@ using System.Globalization;
 
 var builder = WebApplication.CreateBuilder(args);
 
-builder.Services.AddScoped<Role_repo>();
-builder.Services.AddScoped<UserRole_repo>();
+builder.Services.AddScoped<IRole_repo, Role_repo>();
 
 builder.Services.AddScoped<OrderManagementRepo>();
 
@@ -20,6 +19,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 builder.Services.AddDatabaseDeveloperPageExceptionFilter();
 
 builder.Services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>();
 builder.Services.AddControllersWithViews();
 

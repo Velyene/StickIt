@@ -11,13 +11,11 @@ namespace ELKH.Controllers
     public class AdminController : Controller
 
     {
-        private readonly Role_repo _roleRepo;
-        private readonly UserRole_repo _userRoleRepo;
+        private readonly IRole_repo _roleRepo;
 
-        public AdminController(Role_repo roleRepo, UserRole_repo userRoleRepo)
+        public AdminController(IRole_repo roleRepo)
         {
             _roleRepo = roleRepo;
-            _userRoleRepo = userRoleRepo;
         }
         // GET: AdminController
         public ActionResult Index()

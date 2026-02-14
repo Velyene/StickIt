@@ -1,8 +1,35 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
+﻿@{
+    ViewData["Title"] = "Admin Dashboard";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>Index</h1>
+<h2 class="mb-4">Admin Dashboard</h2>
 
+<div class="row g-4">
+
+    <div class="col-md-4">
+        <a asp-controller="AdminRole"
+           asp-action="ListRoles"
+           class="btn btn-primary w-100 p-4 shadow">
+            Manage Staff Roles
+        </a>
+
+    </div>
+
+    <div class="col-md-4">
+        <a asp-controller="Admin"
+           asp-action="ListOfAllUsers"
+           class="btn btn-primary w-100 p-4">
+            Manage User Accounts
+        </a>
+    </div>
+
+    <div class="col-md-4">
+        <a asp-controller="Admin"
+           asp-action="ManageSales"
+           class="btn btn-primary w-100 p-4">
+            Manage Sales
+        </a>
+    </div>
+
+</div>

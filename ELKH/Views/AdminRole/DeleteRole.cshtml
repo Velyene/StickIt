@@ -1,33 +1,44 @@
 ﻿@model ELKH.ViewModels.RoleVM
 
 @{
-    ViewData["Title"] = "DeleteRole";
+    ViewData["Title"] = "Delete Role";
     Layout = "~/Views/Shared/_AdminLayout.cshtml";
 }
 
-<h1>DeleteRole</h1>
+<div class="card shadow-sm mx-auto border-danger" style="max-width:500px;">
+    <div class="card-body text-center">
 
-<h3>Are you sure you want to delete this?</h3>
-<div>
-    <h4>RoleVM</h4>
-    <hr />
-    <dl class="row">
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RoleId)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RoleId)
-        </dd>
-        <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.RoleName)
-        </dt>
-        <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.RoleName)
-        </dd>
-    </dl>
-    
-    <form asp-action="DeleteRole">
-        <input type="submit" value="Delete" class="btn btn-danger" /> |
-        <a asp-action="Index">Back to List</a>
-    </form>
+        <h3 class="text-danger fw-bold mb-3">Delete Role</h3>
+
+        <p class="mb-4">
+            Are you sure you want to delete this role?
+        </p>
+
+        <div class="alert alert-light border">
+            <strong>@Model.RoleName</strong>
+        </div>
+
+        <form asp-controller="AdminRole"
+              asp-action="DeleteRole"
+              method="post">
+
+            <input type="hidden" asp-for="RoleId" />
+
+            <div class="d-flex justify-content-center gap-3 mt-4">
+
+                <a asp-action="ListRoles"
+                   class="btn btn-outline-secondary">
+                    Cancel
+                </a>
+
+                <button type="submit"
+                        class="btn btn-danger">
+                    Delete
+                </button>
+
+            </div>
+
+        </form>
+
+    </div>
 </div>
