@@ -53,6 +53,12 @@
 
                         <td class="text-center">
 
+                            <a asp-action="ViewRoleUsers"
+                               asp-route-roleId="@item.RoleId"
+                               class="btn btn-sm btn-outline-info me-2">
+                                View
+                            </a>
+
                             <a asp-action="EditRole"
                                asp-route-roleId="@item.RoleId"
                                class="btn btn-sm btn-outline-primary me-2">

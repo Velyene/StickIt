@@ -214,6 +214,55 @@ namespace ELKH.Controllers
                 .ToList();
         }
 
+        //================= View Users in Role =================
+
+        //get users in role
+        public async Task<IActionResult> ViewRoleUsers(string roleId)
+        {
+            if (string.IsNullOrEmpty(roleId))
+                return NotFound();
+
+            var role = await _roleManager.FindByIdAsync(roleId);
+
+            // Check if role exists
+            if (role == null)
+            {
+                return NotFound();
+            }
+
+            // Get users in role
+            var usersInRole = new List<IdentityUser>();
+
+            foreach (var user in _userManager.Users)
+            {
+                if (await _userManager.IsInRoleAsync(user, role.Name))
+                {
+                    usersInRole.Add(user);
+                }
+            }
+
+            ViewBag.RoleId = role.Id;
+            ViewBag.RoleName = role.Name;
+
+            return View(usersInRole);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveUserFromRole(string roleId, string userId)
+        { 
+            var role = await _roleManager.FindByIdAsync(roleId);
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (role == null || user == null)
+                return NotFound();
+
+            await _userManager.RemoveFromRoleAsync(user, role.Name);
+
+            return RedirectToAction("ViewRoleUsers", new { roleId = roleId });
+        }
+
+
     }
 }
 
